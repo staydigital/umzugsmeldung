@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="#">Smarter umziehen</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item " [class.active]="activeView === 'suche'">
+        <a class="nav-link" routerLink="suche" (click)="changeView('suche')">Suche
+          <span [class.sr-only]="activeView === 'suche'"></span>
+        </a>
+      </li>
+      <li class="nav-item" [class.active]="activeView === 'versicherungsnehmer'">
+        <a class="nav-link" routerLink="versicherungsnehmer" (click)="changeView('versicherungsnehmer')">Versicherungsnehmer</a>
+      </li>
+      <li class="nav-item" [class.active]="activeView === 'vertraege'">
+        <a class="nav-link" routerLink="vertraege" (click)="changeView('vertraege')">Verträge</a>
+      </li>
+      <li class="nav-item" [class.active]="activeView === 'vorgaenge'">
+        <a class="nav-link" routerLink="vorgaenge" (click)="changeView('vorgaenge')">Offene Vorgänge</a>
+      </li>
+    </ul>
+  </div>
+</nav>

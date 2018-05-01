@@ -1,0 +1,11 @@
+
+<form>  
+  <mat-form-field class="vnsuche-full-width">    
+    <input matInput placeholder="Kundennummer, Nachname oder Vorname" aria-label="State" [matAutocomplete]="auto" [formControl]="formCtrl">    
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getSelectedOption($event.option.value)" [displayWith]="displayTextvalue">
+      <mat-option *ngFor="let vn of filteredVns | async" [value]="vn">
+        {{vn.textvalue}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

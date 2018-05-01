@@ -1,0 +1,42 @@
+<app-vnsuche (selectedVn)="onSelectVn($event)"></app-vnsuche>
+<br/>
+<br/>
+<h5>Aktuelle Adresse</h5>
+<div class="row">
+  <div class="col-md-2">
+    Strasse:
+  </div>
+  <div class="col-md-4">
+    {{selectedAdresse.strasse}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2">
+    Postleitzahl:
+  </div>
+  <div class="col-md-2">
+    {{selectedAdresse.plz}}
+  </div>
+  <div class="col-md-2">
+    Ort:
+  </div>
+  <div class="col-md-2">
+    {{selectedAdresse.ort}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2">
+    Land:
+  </div>
+  <div class="col-md-4">
+    {{selectedAdresse.land}}
+  </div>
+</div>
+<br/>
+<br/>
+<h5>Erfasste Verträge</h5>
+<ul class="heroes">
+  <li *ngFor="let vertrag of selectedVertraege">
+    <span class="badge">{{vertrag.vertragId}}</span>
+  </li>
+</ul>

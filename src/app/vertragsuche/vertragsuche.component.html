@@ -1,0 +1,10 @@
+<form>
+  <mat-form-field class="vertragssuche-full-width">
+    <input matInput placeholder="Vertragsnummer" aria-label="State" [matAutocomplete]="auto" [formControl]="formCtrl">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let vertrag of filteredVertraege | async" [value]="vertrag.vertragId">
+        {{vertrag.vertragId}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
