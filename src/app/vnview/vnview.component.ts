@@ -14,16 +14,13 @@ import { VertragService } from '../services/vertrag.service';
 })
 export class VnviewComponent implements OnInit {
 
-  selectedVn: Vn = {
-    kundennummer: 'X001',
-    vorname: 'Stefan',
-    nachname: 'Wittmann',
-    adresseId: 1
-  };
+  selectedVn: Vn;
 
   selectedAdresse: Adresse;
 
   selectedVertraege: Vertrag[];
+
+  editorMode: Boolean = false;
 
   constructor(private adresseService: AdresseService, private vertragService: VertragService) { }
 
@@ -39,5 +36,9 @@ export class VnviewComponent implements OnInit {
   onSelectVn(selectedVn) {
     this.selectedVn = selectedVn;
     this.getChildData();
+  }
+
+  toggleEditorMode() {
+    this.editorMode = !this.editorMode;
   }
 }

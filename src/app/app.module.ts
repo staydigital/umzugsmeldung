@@ -29,6 +29,8 @@ import { Vertrag } from './model/vertrag';
 import { VertragsucheComponent } from './vertragsuche/vertragsuche.component';
 import { VertragsviewComponent } from './vertragsview/vertragsview.component';
 import { VnviewComponent } from './vnview/vnview.component';
+import { AdresseditorComponent } from './component/adresseditor/adresseditor.component';
+import { AdressviewerComponent } from './component/adressviewer/adressviewer.component';
 
 library.add(faCoffee);
 
@@ -44,7 +46,9 @@ library.add(faCoffee);
     VnsucheComponent,
     VertragsucheComponent,
     VertragsviewComponent,
-    VnviewComponent
+    VnviewComponent,
+    AdresseditorComponent,
+    AdressviewerComponent
   ],
   imports: [
     BrowserModule,
