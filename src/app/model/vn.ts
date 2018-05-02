@@ -11,4 +11,8 @@ export class Vn extends Resource {
     vorname: string;
     nachname: string;
     Adresse: Adresse;
+
+    getTextRepresentation(): String {
+        return this.kundennummer + ', ' + this.nachname + ' ' + this.vorname;
+    }
 }

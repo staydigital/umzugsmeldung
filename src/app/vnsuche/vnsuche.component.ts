@@ -6,8 +6,7 @@ import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
 
 import { VnService } from '../services/vn.service';
-import { Vnrep } from './vnrep';
-import { Vn } from '../vn';
+import { Vn } from '../model/vn';
 @Component({
   selector: 'app-vnsuche',
   templateUrl: './vnsuche.component.html',
@@ -17,11 +16,9 @@ import { Vn } from '../vn';
 export class VnsucheComponent implements OnInit {
   formCtrl: FormControl;
 
-  filteredVns: Observable<Vnrep[]>;
+  filteredVns: Observable<Vn[]>;
 
-  vns: Vnrep[] = [];
-
-  vnsdata: Vn[] = [];
+  vns: Vn[] = [];
 
   @Output() selectedVn = new EventEmitter<Vn>();
 
@@ -29,34 +26,35 @@ export class VnsucheComponent implements OnInit {
     this.formCtrl = new FormControl();
     this.filteredVns = this.formCtrl.valueChanges
       .pipe(
-      startWith(''),
-      map(vn => vn ? this.filterVn(vn) : this.vns.slice())
+        startWith(''),
+        map(vn => vn ? this.filterVn(vn) : this.vns.slice())
       );
   }
 
-  filterVn(textvalue: string) {
-    return this.vns.filter(vn =>
-      vn.textvalue.toLowerCase().indexOf(vn.textvalue.toLowerCase()) !== -1);
+  filterVn(searchText: any) {
+    if (searchText instanceof Vn) {
+      return this.vns.filter(vn =>
+        vn.getTextRepresentation().toLowerCase().indexOf(searchText.getTextRepresentation().toLowerCase()) !== -1);
+    } return this.vns.filter(vn =>
+      vn.getTextRepresentation().toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
   }
 
-  ngOnInit() {  
+
+  ngOnInit() {
     this.vnService.getAll().subscribe(
-      success => {        
-        this.vnsdata = success;
-        for (const vn of success) {
-          this.vns.push(new Vnrep(vn, vn.kundennummer + ', ' + vn.nachname + ' ' + vn.vorname));
-        }                
+      success => {
+        this.vns = success;
       });
   }
 
-  displayTextvalue(vn: Vnrep): string {
+  displayTextvalue(vn: Vn): String {
     if (vn) {
-      return vn.textvalue;
+      return vn.getTextRepresentation();
     }
   }
 
-  getSelectedOption(selectedOption: Vnrep) {
-    this.selectedVn.emit(selectedOption.vn);
+  getSelectedOption(selectedOption: Vn) {
+    this.selectedVn.emit(selectedOption);
   }
 
 }

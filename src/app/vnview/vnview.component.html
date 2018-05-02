@@ -6,7 +6,9 @@
   <br/>
   <br/>
   <div *ngIf="!editorMode">
-    <app-adressviewer [selectedAdresse]="selectedAdresse"></app-adressviewer>
+    <div *ngIf="selectedAdresse">
+      <app-adressviewer [selectedAdresse]="selectedAdresse"></app-adressviewer>
+    </div>
     <br/>
     <br/>
     <h5>Erfasste Verträge</h5>
