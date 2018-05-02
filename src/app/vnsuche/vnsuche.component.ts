@@ -43,8 +43,7 @@ export class VnsucheComponent implements OnInit {
     this.vnService.getVns().subscribe(vns => this.vnsdata = vns);
     for (const vn of this.vnsdata) {
       this.vns.push(new Vnrep(vn, vn.kundennummer + ', ' + vn.nachname + ' ' + vn.vorname));
-    }
-    console.log(this.selectedVn);
+    }    
   }
 
   displayTextvalue(vn: Vnrep): string {
@@ -53,9 +52,7 @@ export class VnsucheComponent implements OnInit {
     }
   }
 
-  getSelectedOption(selectedOption: Vnrep) {
-    console.log('Before emit');
-    console.log(selectedOption);
+  getSelectedOption(selectedOption: Vnrep) {    
     this.selectedVn.emit(selectedOption.vn);
   }
 

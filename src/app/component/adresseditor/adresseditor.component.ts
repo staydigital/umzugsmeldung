@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import { Adresse } from '../../model/adresse';
 @Component({
   selector: 'app-adresseditor',
@@ -9,7 +11,13 @@ export class AdresseditorComponent implements OnInit {
 
   @Input() selectedAdresse: Adresse;
 
-  newAdresse: Adresse;
+  newAdresse: Adresse = {
+    adresseId: 0,
+    strasse: '',
+    plz: '',
+    ort: '',
+    land: ''    
+  };
 
   @Output() cancelCB = new EventEmitter<Boolean>();
 
@@ -21,11 +29,12 @@ export class AdresseditorComponent implements OnInit {
   }
 
   saveAdresse() {
-    alert('Save Adresse');
+    console.log(this.newAdresse);
+    this.saveCB.emit(this.newAdresse);
   }
 
   cancelSave() {
-    alert('Cancel Save');
+    this.cancelCB.emit();
   }
 
 }

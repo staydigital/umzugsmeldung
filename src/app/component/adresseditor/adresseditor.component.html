@@ -14,7 +14,7 @@
     {{selectedAdresse.strasse}}
   </div>
   <div class="col-md-6">
-    <input type="text" style="width: 100%; height: 75%">
+    <input type="text" class="adresseditor-input" [(ngModel)]="newAdresse.strasse">
   </div>
 </div>
 <div class="row">
@@ -25,7 +25,7 @@
     {{selectedAdresse.plz}}
   </div>
   <div class="col-md-6">
-    <input type="text" style="width: 100%; height: 75%">
+    <input type="text" class="adresseditor-input" [(ngModel)]="newAdresse.plz">
   </div>
 </div>
 <div class="row">
@@ -36,7 +36,7 @@
     {{selectedAdresse.ort}}
   </div>
   <div class="col-md-6">
-    <input type="text" style="width: 100%; height: 75%">
+    <input type="text" class="adresseditor-input" [(ngModel)]="newAdresse.ort">
   </div>
 </div>
 <div class="row">
@@ -47,7 +47,7 @@
     {{selectedAdresse.land}}
   </div>
   <div class="col-md-6">
-    <input type="text" style="width: 100%; height: 75%">
+    <input type="text" class="adresseditor-input" [(ngModel)]="newAdresse.land">
   </div>
 </div>
 <div class="row">
