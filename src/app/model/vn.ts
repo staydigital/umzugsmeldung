@@ -7,6 +7,7 @@ export class Vn extends Resource {
         super();
     }
 
+    id: number;
     kundennummer: string;
     vorname: string;
     nachname: string;

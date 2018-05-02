@@ -29,6 +29,7 @@ import { VnsucheComponent } from './vnsuche/vnsuche.component';
 import { VnService } from './services/vn.service';
 import { VertragService } from './services/vertrag.service';
 import { AdresseService } from './services/adresse.service';
+import { UmzugsmeldungService } from './services/umzugsmeldung.service';
 
 import { Vertrag } from './model/vertrag';
 import { VertragsucheComponent } from './vertragsuche/vertragsuche.component';
@@ -87,7 +88,7 @@ library.add(faCoffee);
       }
     ])
   ],
-  providers: [VnService, VertragService, AdresseService,
+  providers: [VnService, VertragService, AdresseService, UmzugsmeldungService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptor,
