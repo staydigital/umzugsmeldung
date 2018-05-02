@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-
+import { Injectable, Injector } from '@angular/core';
+import { RestService } from 'angular4-hal/dist/src/rest.service';
 import { Vertrag } from '../model/vertrag';
 
 @Injectable()
-export class VertragService {
-  
+export class VertragService extends RestService<Vertrag> {
+    constructor(injector: Injector) {
+        super(Vertrag, 'vertrag', injector);
+    }
 }

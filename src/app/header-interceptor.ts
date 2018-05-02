@@ -9,7 +9,7 @@ export class HeaderInterceptor {
             req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
         }
 
-        req = req.clone({ headers: req.headers.set('Accept', 'application/json') });        
+        req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
         return next.handle(req);
     }
 }

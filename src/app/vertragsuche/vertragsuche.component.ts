@@ -30,12 +30,16 @@ export class VertragsucheComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.vertragService.getVertraege().subscribe(vertraege => this.vertraege = vertraege);
+    this.vertragService.getAll().subscribe(
+      success => {
+        this.vertraege = success;
+      }
+    );
   }
 
-  filterVertraege(vertragId: string) {
+  filterVertraege(vsnr: string) {
     return this.vertraege.filter(vertrag =>
-      vertrag.vertragId.toLowerCase().indexOf(vertragId.toLowerCase()) !== -1);
+      vertrag.vsnr.toLowerCase().indexOf(vsnr.toLowerCase()) !== -1);
   }
 
 }

@@ -2,6 +2,6 @@ import { Resource } from 'angular4-hal';
 import { Adresse } from './adresse';
 
 export class Vertrag extends Resource {
-    vsnr: string;    
+    vsnr: string;
     adresse: Adresse;
 }

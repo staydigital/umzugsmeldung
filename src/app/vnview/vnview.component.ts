@@ -1,6 +1,6 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 
-import { Vn } from '../vn';
+import { Vn } from '../model/vn';
 import { Adresse } from '../model/adresse';
 import { Vertrag } from '../model/vertrag';
 
@@ -20,7 +20,7 @@ export class VnviewComponent implements OnInit {
 
   selectedVertraege: Vertrag[];
 
-  editorMode: boolean = false;
+  editorMode: Boolean = false;
 
   constructor(private adresseService: AdresseService, private vertragService: VertragService) { }
 
@@ -31,15 +31,15 @@ export class VnviewComponent implements OnInit {
   getChildData() {
     if (this.selectedVn.kundennummer) {
       this.selectedVn.getRelation(Adresse, 'adresse').subscribe(
-        success => {          
+        success => {
           this.selectedAdresse = success;
         }
-      )
+      );
       this.selectedVn.getRelationArray(Vertrag, 'vertraege').subscribe(
-        success => {          
+        success => {
           this.selectedVertraege = success;
         }
-      )      
+      );
     }
   }
 
@@ -53,15 +53,15 @@ export class VnviewComponent implements OnInit {
   }
 
   cancelCB() {
-    this.editorMode = false;    
+    this.editorMode = false;
   }
 
-  saveCB(event) {    
-    var serverAdresse;    
+  saveCB(event) {
+    let serverAdresse;
     this.adresseService.create(event).subscribe(
-      success => {       
+      success => {
         serverAdresse = success;
       }
-    )        
+    );
   }
 }

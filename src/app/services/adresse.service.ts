@@ -7,5 +7,5 @@ export class AdresseService extends RestService<Adresse> {
 
   constructor(injector: Injector) {
     super(Adresse, 'adresse', injector);
-   }
+  }
 }

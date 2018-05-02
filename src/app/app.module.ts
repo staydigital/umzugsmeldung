@@ -93,8 +93,9 @@ library.add(faCoffee);
       useClass: HeaderInterceptor,
       multi: true
     },
-    { provide: 'ExternalConfigurationService', 
-      useClass: ExternalConfigurationService 
+    {
+      provide: 'ExternalConfigurationService',
+      useClass: ExternalConfigurationService
     }],
   bootstrap: [AppComponent]
 })

@@ -11,13 +11,7 @@ export class AdresseditorComponent implements OnInit {
 
   @Input() selectedAdresse: Adresse;
 
-  newAdresse: Adresse = {
-    adresseId: 0,
-    strasse: '',
-    plz: '',
-    ort: '',
-    land: ''    
-  };
+  newAdresse: Adresse = new Adresse();
 
   @Output() cancelCB = new EventEmitter<Boolean>();
 
