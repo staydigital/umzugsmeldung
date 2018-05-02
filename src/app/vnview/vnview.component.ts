@@ -29,8 +29,18 @@ export class VnviewComponent implements OnInit {
   }
 
   getChildData() {
-    this.adresseService.getAdresse(this.selectedVn.adresseId).subscribe(adresse => this.selectedAdresse = adresse);
-    this.vertragService.getVertraegeByKundennummer(this.selectedVn.kundennummer).subscribe(vertraege => this.selectedVertraege = vertraege);
+    if (this.selectedVn.kundennummer) {
+      this.selectedVn.getRelation(Adresse, 'adresse').subscribe(
+        success => {          
+          this.selectedAdresse = success;
+        }
+      )
+      this.selectedVn.getRelationArray(Vertrag, 'vertraege').subscribe(
+        success => {          
+          this.selectedVertraege = success;
+        }
+      )      
+    }
   }
 
   onSelectVn(selectedVn) {
@@ -46,6 +56,12 @@ export class VnviewComponent implements OnInit {
     this.editorMode = false;    
   }
 
-  saveCB(event) {        
+  saveCB(event) {    
+    var serverAdresse;    
+    this.adresseService.create(event).subscribe(
+      success => {       
+        serverAdresse = success;
+      }
+    )        
   }
 }

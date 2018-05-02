@@ -28,10 +28,10 @@ export class VnsucheComponent implements OnInit {
   constructor(private vnService: VnService) {
     this.formCtrl = new FormControl();
     this.filteredVns = this.formCtrl.valueChanges
-    .pipe(
+      .pipe(
       startWith(''),
       map(vn => vn ? this.filterVn(vn) : this.vns.slice())
-    );
+      );
   }
 
   filterVn(textvalue: string) {
@@ -39,11 +39,14 @@ export class VnsucheComponent implements OnInit {
       vn.textvalue.toLowerCase().indexOf(vn.textvalue.toLowerCase()) !== -1);
   }
 
-  ngOnInit() {
-    this.vnService.getVns().subscribe(vns => this.vnsdata = vns);
-    for (const vn of this.vnsdata) {
-      this.vns.push(new Vnrep(vn, vn.kundennummer + ', ' + vn.nachname + ' ' + vn.vorname));
-    }    
+  ngOnInit() {  
+    this.vnService.getAll().subscribe(
+      success => {        
+        this.vnsdata = success;
+        for (const vn of success) {
+          this.vns.push(new Vnrep(vn, vn.kundennummer + ', ' + vn.nachname + ' ' + vn.vorname));
+        }                
+      });
   }
 
   displayTextvalue(vn: Vnrep): string {
@@ -52,7 +55,7 @@ export class VnsucheComponent implements OnInit {
     }
   }
 
-  getSelectedOption(selectedOption: Vnrep) {    
+  getSelectedOption(selectedOption: Vnrep) {
     this.selectedVn.emit(selectedOption.vn);
   }
 

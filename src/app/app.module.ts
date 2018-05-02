@@ -4,9 +4,14 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AngularHalModule } from 'angular4-hal';
+
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+
+import { ExternalConfigurationService } from './external-configuration-service';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -31,6 +36,7 @@ import { VertragsviewComponent } from './vertragsview/vertragsview.component';
 import { VnviewComponent } from './vnview/vnview.component';
 import { AdresseditorComponent } from './component/adresseditor/adresseditor.component';
 import { AdressviewerComponent } from './component/adressviewer/adressviewer.component';
+import { HeaderInterceptor } from './header-interceptor';
 
 library.add(faCoffee);
 
@@ -51,11 +57,13 @@ library.add(faCoffee);
     AdressviewerComponent
   ],
   imports: [
+    AngularHalModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    HttpClientModule,
     NgbModule.forRoot(),
     MatAutocompleteModule,
     MatFormFieldModule,
@@ -79,7 +87,15 @@ library.add(faCoffee);
       }
     ])
   ],
-  providers: [VnService, VertragService, AdresseService],
+  providers: [VnService, VertragService, AdresseService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderInterceptor,
+      multi: true
+    },
+    { provide: 'ExternalConfigurationService', 
+      useClass: ExternalConfigurationService 
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,27 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Injectable, Injector } from '@angular/core';
+import { RestService } from 'angular4-hal/dist/src/rest.service';
 import { Vn } from '../vn';
 
+
 @Injectable()
-export class VnService {
+export class VnService extends RestService<Vn> {
 
-  mockVn: Vn[] = [{
-    kundennummer: 'X001',
-    vorname: 'Stefan',
-    nachname: 'Wittmann',
-    adresseId: 1
-  },
-  {
-    kundennummer: 'Y001',
-    vorname: 'Max',
-    nachname: 'Mustermann',
-    adresseId: 2
-  }];
-
-  constructor() { }
-
-  getVns(): Observable<Vn[]> {
-    return of(this.mockVn);
+  constructor(injector: Injector) {     
+    super(Vn, 'vn', injector);
   }
 }
