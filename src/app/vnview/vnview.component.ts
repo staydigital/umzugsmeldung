@@ -1,4 +1,5 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Vn } from '../model/vn';
 import { Adresse } from '../model/adresse';
@@ -8,6 +9,8 @@ import { Umzugsmeldung } from '../model/umzugsmeldung';
 import { AdresseService } from '../services/adresse.service';
 import { VertragService } from '../services/vertrag.service';
 import { UmzugsmeldungService } from '../services/umzugsmeldung.service';
+import { ContextService } from '../services/context.service';
+
 import { tap, flatMap } from 'rxjs/operators';
 
 @Component({
@@ -17,21 +20,28 @@ import { tap, flatMap } from 'rxjs/operators';
 })
 export class VnviewComponent implements OnInit {
 
-  selectedVn: Vn = new Vn();
+  @Input() selectedVn: Vn;
 
   selectedAdresse: Adresse;
 
-  serverAdresse: Adresse;
+  @Input() serverAdresse: Adresse;
 
   selectedVertraege: Vertrag[];
 
-  editorMode: Boolean = false;
+  selectedVertrag: Vertrag;
+  
+  processedVertraege: Vertrag[];
+
+  editorMode: boolean = false;
+
+  processMode: boolean = false;
 
   constructor(private adresseService: AdresseService, private vertragService: VertragService,
-    private umzugsmeldungService: UmzugsmeldungService) { }
+    private umzugsmeldungService: UmzugsmeldungService, private contextService: ContextService, private router: Router) { }
 
   ngOnInit() {
-    this.getChildData();
+    this.selectedVn = this.contextService.selectedVn;
+    this.getChildData();    
   }
 
   getChildData() {
@@ -54,33 +64,42 @@ export class VnviewComponent implements OnInit {
     this.getChildData();
   }
 
-  toggleEditorMode() {
-    this.editorMode = !this.editorMode;
+  gotoVertrag(vertrag) {
+    this.contextService.selectedVertrag = vertrag;
+    this.router.navigateByUrl('/vertraege');
+  }
+
+  setEditorMode(enabled: boolean) {
+    this.editorMode = enabled;        
+  }
+
+  setProcessMode(enabled: boolean) {
+    this.processMode = enabled;    
   }
 
   cancelCB() {
     this.editorMode = false;
   }
-
-  /*
- return this.http.get('/api/books/' + id)
-    .map((res: any) => res.json())
-    .flatMap((book: any) => {
-      return this.http.get('/api/authors/' + book.author_id)
-        .map((res: any) => res.json());
-    });
-    */
+  
   saveCB(event) {
     this.adresseService.create(event)
     .map((res: any) => res)
-    .flatMap((adresse: any) => {
+    .flatMap((adresse: any) => {      
       const request = new Umzugsmeldung();
       request.vnId = this.selectedVn.id;
       request.adresseId = adresse.id;
       return this.umzugsmeldungService.create(request);
-    }).subscribe(
-      success => {
-        console.log('Created umzugsmeldung');
+    })    
+    .subscribe(
+      success => {        
+        this.selectedVn.getRelationArray(Vertrag, 'vertraege').subscribe(
+          success => {                        
+            this.processedVertraege = success;
+            this.getChildData();            
+            this.setEditorMode(false);
+            this.setProcessMode(true);
+          }
+        );
       }
     );
   }

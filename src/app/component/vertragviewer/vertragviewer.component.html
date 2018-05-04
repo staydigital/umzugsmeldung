@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-1">
+    {{selectedVertrag.vsnr}}
+  </div>
+  <div class="col-md-2">
+    {{selectedVertrag.getSparte()}}
+  </div>
+  <div class="col-md-1">
+    <span *ngIf="selectedVertrag.isNoHandlingRequired()">automatisiert</span>
+  </div>
+  <div class="col-md-1">
+    <span *ngIf="selectedVertrag.isHandlingRequired()">manuell</span>
+  </div>
+  <div class="col-md-1">
+    <button *ngIf="selectedVertrag.isHandlingRequired()" class="btn btn-link btn-sm" (click)="vertragClick(selectedVertrag)">Vertrag</button>
+  </div>
+</div>

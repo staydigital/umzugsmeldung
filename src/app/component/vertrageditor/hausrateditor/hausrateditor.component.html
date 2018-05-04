@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-2">
+    Quadratmeter:
+  </div>
+  <div class="col-md-2">
+    {{selectedVertrag.hausrat.quadratMeter}}
+  </div>
+  <div class="col-md-2">
+    <input type="text" [(ngModel)]="selectedVertrag.hausrat.quadratMeter" />
+  </div>  
+</div>
+<div class="row">
+  <div class="col-md-2">
+    Glassversicherung:
+  </div>
+  <div class="col-md-2">
+    <div *ngIf="selectedVertrag.hausrat.glasVersichert">Ja</div>
+    <div *ngIf="!selectedVertrag.hausrat.glasVersichert">Nein</div>
+  </div>
+  <div class="col-md-4">
+    <input type="checkbox" [(ngModel)]="selectedVertrag.hausrat.glasVersichert" />
+  </div>
+</div>

@@ -1,9 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@angular/material/prebuilt-themes/purple-green.css";
 @import "~bootstrap/dist/css/bootstrap.css";
 body {
     padding-top: 80px; 
+    
+    background: url("assets\images\smit_background.png");
+    background-repeat: repeat;
+    color: white;
  }
-  .starter-template {     
+
+ ::placeholder {
+     color: white;
+ }
+.starter-template {     
      text-align: center;
  }

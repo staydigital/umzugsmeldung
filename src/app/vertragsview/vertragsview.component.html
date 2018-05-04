@@ -1,1 +1,4 @@
-<app-vertragsuche></app-vertragsuche>
+<app-vertragsuche [selectedVertrag]="selectedVertrag" (onSelectVertrag)="onSelect($event)"></app-vertragsuche>
+<div *ngIf="selectedVertrag.vsnr">
+    <app-vertrageditor [selectedVertrag]="selectedVertrag" ></app-vertrageditor>
+</div>

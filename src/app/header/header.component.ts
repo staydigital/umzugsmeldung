@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ContextService } from '../services/context.service';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   activeView: 'suche';
-  constructor() { }
+  constructor(private contextService: ContextService) { }
 
   ngOnInit() {
   }
 
   changeView(ActiveView) {
+    this.contextService.reset();
     this.activeView = ActiveView;
   }
 

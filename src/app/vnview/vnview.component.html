@@ -1,7 +1,7 @@
 <app-vnsuche (selectedVn)="onSelectVn($event)"></app-vnsuche>
 <div *ngIf="selectedVn.kundennummer">
   <div class="col-md-6">
-    <button (click)="toggleEditorMode()">{{editorMode ? 'Abbrechen' : 'Neue Adresse'}}</button>
+    <button (click)="setEditorMode(true); setProcessMode(false);" class="btn btn-default btn-sm">{{editorMode ? 'Abbrechen' : 'Neue Adresse'}}</button>
   </div>
   <br/>
   <br/>
@@ -10,15 +10,17 @@
       <app-adressviewer [selectedAdresse]="selectedAdresse"></app-adressviewer>
     </div>
     <br/>
-    <br/>
-    <h5>Erfasste Verträge</h5>
-    <ul class="heroes">
-      <li *ngFor="let vertrag of selectedVertraege">
-        <span class="badge">{{vertrag.vsnr}}</span>
-      </li>
-    </ul>
+    <br/>    
   </div>
-  <div *ngIf="editorMode">
-    <app-adresseditor [selectedAdresse]="selectedAdresse" (cancelCB)="cancelCB()" (saveCB)="saveCB($event)"></app-adresseditor>
+  <div *ngIf="editorMode">    
+    <app-adresseditor [selectedAdresse]="selectedAdresse" (cancelCB)="cancelCB()" (saveCB)="saveCB($event)"></app-adresseditor>    
+  </div>
+  <div *ngIf="processMode">
+    <br/>
+    <br/>
+    <h5>Folgende Verträge wurden versucht automatisch umzumelden</h5>
+    <div *ngFor="let vertrag of processedVertraege">
+      <app-vertragviewer [selectedVertrag]="vertrag" (onVertragClick)="gotoVertrag($event)"></app-vertragviewer>
+    </div>
   </div>
 </div>

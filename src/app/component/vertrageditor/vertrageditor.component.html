@@ -1,0 +1,45 @@
+<h5>Stammdaten</h5>
+<div class="row">
+  <div class="col-md-2">
+    Vsnr:
+  </div>
+  <div class="col-md-4">
+    {{selectedVertrag.vsnr}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2">
+    Art:
+  </div>
+  <div class="col-md-2">
+    {{selectedVertrag.getSparte()}}
+  </div>
+</div>
+<br/>
+<br/>
+<h6>Spartenspezifisch</h6>
+<div *ngIf="selectedVertrag.isKfz()">
+  <app-kfzeditor [selectedVertrag]="selectedVertrag"></app-kfzeditor>
+</div>
+<div *ngIf="selectedVertrag.isHausrat()">
+  <app-hausrateditor [selectedVertrag]="selectedVertrag"></app-hausrateditor>
+</div>
+<div *ngIf="selectedVertrag.isLV()">
+  <app-lveditor [selectedVertrag]="selectedVertrag"></app-lveditor>
+</div>
+<div class="row" *ngIf="editorMode">
+  <div class="col-md-1">
+    <button (click)="updateVertrag()" class="btn btn-default btn-sm">Speichern</button>
+  </div>
+</div>
+<div class="row" *ngIf="spinMode">
+  
+  <div class="col-md-2">
+      <h5 class="example-h2">  Speichervorgang</h5>
+  </div>
+  <div class="col-md-10">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  
+</div>
+

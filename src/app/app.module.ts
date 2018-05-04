@@ -10,6 +10,7 @@ import { AngularHalModule } from 'angular4-hal';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { ExternalConfigurationService } from './external-configuration-service';
 
@@ -30,6 +31,8 @@ import { VnService } from './services/vn.service';
 import { VertragService } from './services/vertrag.service';
 import { AdresseService } from './services/adresse.service';
 import { UmzugsmeldungService } from './services/umzugsmeldung.service';
+import { ExecutorService} from './service/executor.service';
+import { ContextService } from './services/context.service';
 
 import { Vertrag } from './model/vertrag';
 import { VertragsucheComponent } from './vertragsuche/vertragsuche.component';
@@ -38,6 +41,11 @@ import { VnviewComponent } from './vnview/vnview.component';
 import { AdresseditorComponent } from './component/adresseditor/adresseditor.component';
 import { AdressviewerComponent } from './component/adressviewer/adressviewer.component';
 import { HeaderInterceptor } from './header-interceptor';
+import { VertragviewerComponent } from './component/vertragviewer/vertragviewer.component';
+import { VertrageditorComponent } from './component/vertrageditor/vertrageditor.component';
+import { HausrateditorComponent } from './component/vertrageditor/hausrateditor/hausrateditor.component';
+import { KfzeditorComponent } from './component/vertrageditor/kfzeditor/kfzeditor.component';
+import { LveditorComponent } from './component/vertrageditor/lveditor/lveditor.component';
 
 library.add(faCoffee);
 
@@ -55,7 +63,12 @@ library.add(faCoffee);
     VertragsviewComponent,
     VnviewComponent,
     AdresseditorComponent,
-    AdressviewerComponent
+    AdressviewerComponent,
+    VertragviewerComponent,
+    VertrageditorComponent,
+    HausrateditorComponent,
+    KfzeditorComponent,
+    LveditorComponent
   ],
   imports: [
     AngularHalModule.forRoot(),
@@ -69,6 +82,7 @@ library.add(faCoffee);
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressBarModule,
     RouterModule.forRoot([
       {
         path: 'suche',
@@ -88,7 +102,7 @@ library.add(faCoffee);
       }
     ])
   ],
-  providers: [VnService, VertragService, AdresseService, UmzugsmeldungService,
+  providers: [VnService, VertragService, AdresseService, UmzugsmeldungService, ExecutorService, ContextService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptor,
