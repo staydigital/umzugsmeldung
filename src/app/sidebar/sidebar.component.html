@@ -1,3 +1,24 @@
-<p class="bg-red">
-  sidebar works!
-</p>
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Beratungsprotokolle">
+    </mat-form-field>
+  </div>
+
+  <mat-table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="vsnr">
+      <th mat-header-cell *matHeaderCellDef> Vsnr </th>
+      <td mat-cell *matCellDef="let element"> {{element.vsnr}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="sparte">
+      <th mat-header-cell *matHeaderCellDef> Sparte </th>
+      <td mat-cell *matCellDef="let element"> {{element.sparte}} </td>
+    </ng-container>
+        
+    <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)"></mat-row>
+  </mat-table>
+</div>

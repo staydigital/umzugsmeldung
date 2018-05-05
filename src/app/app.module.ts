@@ -3,7 +3,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import {CdkTableModule} from '@angular/cdk/table';
+
+import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularHalModule } from 'angular4-hal';
 
@@ -11,6 +13,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatTableModule} from '@angular/material/table';
 
 import { ExternalConfigurationService } from './external-configuration-service';
 
@@ -33,6 +36,7 @@ import { AdresseService } from './services/adresse.service';
 import { UmzugsmeldungService } from './services/umzugsmeldung.service';
 import { ExecutorService} from './service/executor.service';
 import { ContextService } from './services/context.service';
+import { BeratungsprotokollService } from './services/beratungsprotokoll.service';
 
 import { Vertrag } from './model/vertrag';
 import { VertragsucheComponent } from './vertragsuche/vertragsuche.component';
@@ -48,6 +52,27 @@ import { KfzeditorComponent } from './component/vertrageditor/kfzeditor/kfzedito
 import { LveditorComponent } from './component/vertrageditor/lveditor/lveditor.component';
 
 library.add(faCoffee);
+
+
+const appRoutes: Routes = [
+  {
+    path: 'suche',
+    component: SucheComponent
+  },
+  {
+    path: 'vorgaenge',
+    component: VorgaengeComponent
+  },
+  {
+    path: 'versicherungsnehmer',
+    component: VnviewComponent
+  },
+  {
+    path: 'vertraege',
+    component: VertragsviewComponent
+  }
+];
+
 
 @NgModule({
   declarations: [
@@ -81,28 +106,17 @@ library.add(faCoffee);
     NgbModule.forRoot(),
     MatAutocompleteModule,
     MatFormFieldModule,
+    CdkTableModule,
     MatInputModule,
     MatProgressBarModule,
-    RouterModule.forRoot([
-      {
-        path: 'suche',
-        component: SucheComponent
-      },
-      {
-        path: 'vorgaenge',
-        component: VorgaengeComponent
-      },
-      {
-        path: 'versicherungsnehmer',
-        component: VnviewComponent
-      },
-      {
-        path: 'vertraege',
-        component: VertragsviewComponent
+    MatTableModule,
+    RouterModule.forRoot(
+      appRoutes, {
+        onSameUrlNavigation: 'reload'
       }
-    ])
+    )
   ],
-  providers: [VnService, VertragService, AdresseService, UmzugsmeldungService, ExecutorService, ContextService,
+  providers: [VnService, VertragService, AdresseService, UmzugsmeldungService, ExecutorService, ContextService, BeratungsprotokollService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptor,

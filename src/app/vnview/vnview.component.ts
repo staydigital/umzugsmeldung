@@ -29,7 +29,7 @@ export class VnviewComponent implements OnInit {
   selectedVertraege: Vertrag[];
 
   selectedVertrag: Vertrag;
-  
+
   processedVertraege: Vertrag[];
 
   editorMode: boolean = false;
@@ -41,7 +41,7 @@ export class VnviewComponent implements OnInit {
 
   ngOnInit() {
     this.selectedVn = this.contextService.selectedVn;
-    this.getChildData();    
+    this.getChildData();
   }
 
   getChildData() {
@@ -65,43 +65,44 @@ export class VnviewComponent implements OnInit {
   }
 
   gotoVertrag(vertrag) {
-    this.contextService.selectedVertrag = vertrag;
+    this.contextService.setSelectedVertrag(vertrag);
     this.router.navigateByUrl('/vertraege');
   }
 
   setEditorMode(enabled: boolean) {
-    this.editorMode = enabled;        
+    this.editorMode = enabled;
   }
 
   setProcessMode(enabled: boolean) {
-    this.processMode = enabled;    
+    this.processMode = enabled;
   }
 
   cancelCB() {
     this.editorMode = false;
   }
-  
+
   saveCB(event) {
     this.adresseService.create(event)
-    .map((res: any) => res)
-    .flatMap((adresse: any) => {      
-      const request = new Umzugsmeldung();
-      request.vnId = this.selectedVn.id;
-      request.adresseId = adresse.id;
-      return this.umzugsmeldungService.create(request);
-    })    
-    .subscribe(
-      success => {        
-        this.selectedVn.getRelationArray(Vertrag, 'vertraege').subscribe(
-          success => {                        
-            this.processedVertraege = success;
-            this.getChildData();            
-            this.setEditorMode(false);
-            this.setProcessMode(true);
-          }
-        );
-      }
-    );
+      .map((res: any) => res)
+      .flatMap((adresse: any) => {
+        const request = new Umzugsmeldung();
+        request.vnId = this.selectedVn.id;
+        request.adresseId = adresse.id;
+        return this.umzugsmeldungService.create(request);
+      })
+      .subscribe(
+        success => {
+          this.selectedVn.getRelationArray(Vertrag, 'vertraege').subscribe(
+            success => {
+              this.processedVertraege = success;
+              this.getChildData();
+              this.setEditorMode(false);
+              this.setProcessMode(true);
+              this.contextService.refreshSidebar();
+            }
+          );
+        }
+      );
   }
 
 }

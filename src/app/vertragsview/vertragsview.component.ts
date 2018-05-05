@@ -12,12 +12,15 @@ export class VertragsviewComponent implements OnInit {
   constructor(private contextService: ContextService) { }
 
   ngOnInit() {
-    this.selectedVertrag = this.contextService.selectedVertrag;
+    this.selectedVertrag = this.contextService.getSelectedVertrag();
+    this.contextService.onSelectedVertragChange$.subscribe(
+      success => {
+        this.selectedVertrag = this.contextService.getSelectedVertrag();
+      }
+    );
   }
 
-  onSelect(vertrag: Vertrag){
-    console.log('In onSelectVertrag');
-    console.log(vertrag);
+  onSelect(vertrag: Vertrag) {
     this.selectedVertrag = vertrag;
   }
 }
