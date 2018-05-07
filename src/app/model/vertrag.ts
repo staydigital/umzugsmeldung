@@ -16,12 +16,12 @@ export class Vertrag extends Resource {
     haftpflicht: Haftpflicht;
     lv: Lv;
 
-    getSparte():String {
+    getSparte(): String {
         if (this.isHausrat()) {
             return "Hausrat";
         }
         if (this.isKfz()) {
-            return "Kfz";            
+            return "Kfz";
         }
         if (this.isUnfall()) {
             return "Unfall";
@@ -29,58 +29,58 @@ export class Vertrag extends Resource {
         if (this.isHaftpflicht()) {
             return "Haftpflicht";
         }
-        if (this.lv) { 
+        if (this.lv) {
             return "Lebensversicherung";
         }
     }
 
-    isHandlingRequired():boolean {
+    isHandlingRequired(): boolean {
         if (this.activityId) {
             return true;
         }
-        return false;        
+        return false;
     }
 
-    isHausrat():boolean {
+    isHausrat(): boolean {
         if (this.hausrat) {
             return true;
         }
         return false;
     }
 
-    isKfz():boolean {
+    isKfz(): boolean {
         if (this.kfz) {
             return true;
         }
         return false;
     }
 
-    isUnfall():boolean {
+    isUnfall(): boolean {
         if (this.unfall) {
             return true;
         }
         return false;
     }
 
-    isHaftpflicht():boolean {
+    isHaftpflicht(): boolean {
         if (this.haftpflicht) {
             return true;
         }
         return false;
     }
 
-    isLV():boolean {
+    isLV(): boolean {
         if (this.lv) {
             return true;
         }
         return false;
     }
 
-    isNoHandlingRequired():boolean {
+    isNoHandlingRequired(): boolean {
         if (this.activityId) {
             return false;
         }
-        return true;        
+        return true;
     }
 
 

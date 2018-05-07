@@ -28,7 +28,6 @@ export class SidebarComponent implements OnInit {
     console.log('applyFilter');
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
   }
 
   constructor(private contextService: ContextService, private beratungsprotokollService: BeratungsprotokollService,

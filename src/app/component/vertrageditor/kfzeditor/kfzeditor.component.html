@@ -1,3 +1,23 @@
-<p>
-  kfzeditor works!
-</p>
+<div class="row">
+  <div class="col-md-2">
+    Kennzeichen:
+  </div>
+  <div class="col-md-2">
+    {{selectedVertrag.kfz.kennzeichen}}
+  </div>
+  <div class="col-md-2">
+    <input type="text" [(ngModel)]="selectedVertrag.kfz.kennzeichen" />
+  </div>  
+</div>
+<div class="row">
+  <div class="col-md-2">
+    Tiefgarage:
+  </div>
+  <div class="col-md-2">
+    <div *ngIf="selectedVertrag.kfz.tiefgarageVorhanden">Ja</div>
+    <div *ngIf="!selectedVertrag.kfz.tiefgarageVorhanden">Nein</div>
+  </div>
+  <div class="col-md-4">
+    <input type="checkbox" [(ngModel)]="selectedVertrag.kfz.tiefgarageVorhanden" />
+  </div>
+</div>
